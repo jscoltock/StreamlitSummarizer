@@ -4,7 +4,7 @@ from langchain.chains.summarize import load_summarize_chain
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.callbacks import get_openai_callback 
 from langchain.prompts import PromptTemplate
-
+import file_handling
 
 from dotenv import load_dotenv
 
@@ -54,7 +54,7 @@ def load_summary_chain( llm, basic_prompt, refine_prompt):
     )
 
 def run_logic(uploaded_file, input_text, chunk_size, chunk_overlap, basic_prompt, refine_prompt, openai_api_key):
-    essay = uploaded_file.read().decode() if uploaded_file else input_text  
+    essay = file_handling.read_uploaded_file(uploaded_file)
     llm = initialize_llm(openai_api_key)
     docs = split_text(essay, chunk_size, chunk_overlap)
 
