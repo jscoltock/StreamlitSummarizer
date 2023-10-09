@@ -3,7 +3,7 @@ import pyperclip
 
 def set_page():
     st.set_page_config(layout="wide")
-    st.title("GPT 3.5 Document Summarization")
+    st.title("Anneie's GPT 3.5 Document Summarizer")
 
 def input_output_columns():
     col1, col2 = st.columns([5, 5])
