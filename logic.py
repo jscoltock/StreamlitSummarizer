@@ -10,11 +10,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-def initialize_llm(model, openai_api_key):
-    if model == "gpt 3.5 turbo (cheap)":
+def initialize_llm(openai_api_key):
+    #if model == "gpt 3.5 turbo ($0.03)":
         return ChatOpenAI(model="gpt-3.5-turbo", temperature=0,openai_api_key=openai_api_key)
-    else:
-        return ChatOpenAI(model="text-davinci-003", temperature=0,openai_api_key=openai_api_key)
+    #else:
+    #     return OpenAI(model="text-davinci-003", temperature=0,openai_api_key=openai_api_key)
 
 def split_text(essay, chunk_size, chunk_overlap):
     text_splitter = RecursiveCharacterTextSplitter(separators=["\n\n", "\n"], chunk_size=chunk_size, chunk_overlap=chunk_overlap)
@@ -53,9 +53,9 @@ def load_summary_chain( llm, basic_prompt, refine_prompt):
         output_key="output_text"
     )
 
-def run_logic(model, uploaded_file, input_text, chunk_size, chunk_overlap, basic_prompt, refine_prompt, openai_api_key):
+def run_logic(uploaded_file, input_text, chunk_size, chunk_overlap, basic_prompt, refine_prompt, openai_api_key):
     essay = uploaded_file.read().decode() if uploaded_file else input_text  
-    llm = initialize_llm(model, openai_api_key)
+    llm = initialize_llm(openai_api_key)
     docs = split_text(essay, chunk_size, chunk_overlap)
 
     summary_chain = load_summary_chain(llm, basic_prompt, refine_prompt)
@@ -63,4 +63,4 @@ def run_logic(model, uploaded_file, input_text, chunk_size, chunk_overlap, basic
     with get_openai_callback() as cb:
         result = summary_chain({"input_documents": docs}, return_only_outputs=False)
     
-    return "Method: refine" + " LLM: " + model + " Total cost: $" + str(cb.total_cost) + ". \n\n " + result["output_text"]
+    return "Method: refine" + " LLM: GPT-3.5-Turbo " + " Total cost: $" + str(cb.total_cost) + ". \n\n " + result["output_text"]

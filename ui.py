@@ -21,8 +21,8 @@ def sidebar_config():
         with st.expander("File Selection"):
             uploaded_file = st.file_uploader("Select File:", type=['pdf','txt'])
 
-        with st.expander("LLM Model Options"):
-            model = st.radio("Choose LLM version:", ("gpt 3.5 turbo ($0.03)", "text davinci 003 ($0.35)"),disabled=False)
+        with st.expander("OpenAI API Key"):
+            #model = st.radio("Choose LLM version:", ("gpt 3.5 turbo ($0.03)", "text davinci 003 ($0.35)"),disabled=False)
             openai_api_key = st.text_input("Enter OpenAI API Key:",type="password")
 
         with st.expander("Text Splitting Config"):
@@ -36,7 +36,7 @@ def sidebar_config():
             
         # Submit button
         submit_button = st.form_submit_button("Apply")
-    return model, chunk_size, chunk_overlap, refine_prompt, basic_prompt, uploaded_file, submit_button, openai_api_key
+    return chunk_size, chunk_overlap, refine_prompt, basic_prompt, uploaded_file, submit_button, openai_api_key
 
 def copy_to_clipboard_button(col2):
     if col2.button('Copy to Clipboard'):
