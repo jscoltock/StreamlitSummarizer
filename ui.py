@@ -3,7 +3,7 @@ import pyperclip
 
 def set_page():
     st.set_page_config(layout="wide")
-    st.title("Annie's GPT 3.5 Document Summarizer")
+    st.title("Annie's GPT 3.5 Document Summarizer (1.01)")
 
 def input_output_columns():
     col1, col2 = st.columns([5, 5])
@@ -32,7 +32,7 @@ def sidebar_config():
 
         with st.expander("Prompts"):
             basic_prompt = st.text_area("Basic prompt:", value="Provide a detailed summary of the following:")        
-            refine_prompt = st.text_area("Refine prompt:", value="Given the new context, refine the original summary into a one page summary.")
+            refine_prompt = st.text_area("Refine prompt:", value="refine the original summary into a one page summary.")
             
         # Submit button
         submit_button = st.form_submit_button("Apply")
