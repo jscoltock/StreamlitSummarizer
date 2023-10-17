@@ -37,8 +37,3 @@ def sidebar_config():
         # Submit button
         submit_button = st.form_submit_button("Apply")
     return chunk_size, chunk_overlap, refine_prompt, basic_prompt, uploaded_file, submit_button, openai_api_key
-
-def copy_to_clipboard_button(col2):
-    if col2.button('Copy to Clipboard'):
-        pyperclip.copy(st.session_state.get('output_text', ""))
-        col2.success('Text copied to clipboard!')

@@ -24,8 +24,7 @@ def main():
                 st.rerun()
             except Exception as e:
                 st.error(f"An error occurred: {str(e)}")
-
-    ui.copy_to_clipboard_button(col2)
+    
 
 if __name__ == "__main__":
     main()
